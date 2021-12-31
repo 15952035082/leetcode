@@ -45,41 +45,14 @@ public class Main {
 
     }
 
-    public boolean isEvenOddTree(TreeNode root) {
-        Queue<TreeNode> nodes = new LinkedList<>();
-        nodes.offer(root);
-        boolean isEven = true;
-        boolean res = true;
-        while(!nodes.isEmpty()) {
-            int size = nodes.size();
-            int pre = 0 ;
-            for(int i = 0 ;i < size ; i ++) {
-                TreeNode cur = nodes.poll();
-                if(pre != 0) {
-                    if(isEven && ( cur.val%2 == 0 ||  cur.val <= pre)) {
-                        res = false;
-                        break;
-                    } else if(!isEven && ( cur.val%2 == 1 ||  cur.val >= pre)) {
-                        res = false;
-                        break;
-                    }
-                } else {
-                    if(isEven && cur.val%2 == 0 || (!isEven && cur.val%2 == 1)) {
-                        res = false;
-                        break;
-                    }
-                }
-                if(cur.left != null) {
-                    nodes.add(cur.left);
-                }
-                if(cur.right != null) {
-                    nodes.add(cur.right);
-                }
-                pre = cur.val;
-            }
-            isEven = !isEven;
+    public int maxSubArray(int[] nums) {
+        int res = 0;
+        int max = nums[0];
+        for(int x : nums) {
+            res = Math.max(x, res +  x);
+            max = Math.max(res, max);
         }
-        return res;
+        return max;
     }
 
 
