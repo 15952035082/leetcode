@@ -1,0 +1,28 @@
+https://leetcode-cn.com/problems/spiral-matrix/
+
+
+
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> res = new ArrayList<>();
+        int[] dx = {0, 1, 0 , -1};
+        int[] dy = {1, 0, -1, 0};
+        int dir = 0;
+        int index = 0;
+        int size = matrix[0].length * matrix.length;
+        int i = 0, j = 0;
+        while(index < size) {
+            res.add(matrix[i][j]);
+            matrix[i][j] = 101;
+            index++;
+            int nextI = i + dx[dir], nextJ = j + dy[dir];
+            if(nextI == matrix.length || nextI < 0 || nextJ == matrix[0].length || nextJ < 0 || matrix[nextI][nextJ] == 101) {
+                dir++;
+                dir = dir%4;
+            }
+            i = i + dx[dir];
+            j = j + dy[dir];
+        }
+        return res;
+    }
+}

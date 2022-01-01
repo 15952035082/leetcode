@@ -45,15 +45,45 @@ public class Main {
 
     }
 
-    public int maxSubArray(int[] nums) {
-        int res = 0;
-        int max = nums[0];
-        for(int x : nums) {
-            res = Math.max(x, res +  x);
-            max = Math.max(res, max);
+
+    class TempNode implements Comparable<TempNode>{
+
+        int val;
+        ListNode node;
+
+        TempNode(int val, ListNode node) {
+            this.val = val;
+            this.node = node;
         }
-        return max;
+
+
+        @Override
+        public int compareTo(TempNode o) {
+            return val - o.val;
+        }
     }
+
+    public ListNode mergeKLists(ListNode[] lists) {
+        PriorityQueue<TempNode> que = new PriorityQueue<TempNode>();
+        ListNode head = new ListNode(0);
+        ListNode tail = head;
+        for(ListNode node : lists) {
+            if(node != null) {
+                que.add(new TempNode(node.val, node));
+            }
+        }
+        while(!que.isEmpty()) {
+            TempNode curHead = que.poll();
+            tail.next = curHead.node;
+            tail = tail.next;
+            if(curHead.node.next != null) {
+                que.add(new TempNode(curHead.node.next.val, curHead.node.next));
+            }
+        }
+        return head.next;
+    }
+
+
 
 
 }
