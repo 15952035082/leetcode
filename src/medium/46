@@ -1,0 +1,27 @@
+https://leetcode-cn.com/problems/permutations/
+
+
+
+class Solution {
+    List<List<Integer>> res = new ArrayList<>();
+
+    public List<List<Integer>> permute(int[] nums) {
+        List<Integer> list = new ArrayList<>();
+        for(int i : nums) {
+            list.add(i);
+        }
+        backtrack(list, 0, nums.length);
+        return res;
+    }
+
+    private void backtrack(List<Integer> list, int first, int length) {
+        if(first == length) {
+            res.add(new ArrayList<>(list));
+        }
+        for(int i = first; i< length ; i++) {
+            Collections.swap(list, first, i);
+            backtrack(list, first +1, length);
+            Collections.swap(list, first, i);
+        }
+    }
+}

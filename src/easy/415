@@ -1,0 +1,18 @@
+https://leetcode-cn.com/problems/add-strings/
+
+class Solution {
+    public String addStrings(String num1, String num2) {
+        String res = "";
+        boolean hasTen = false;
+        int length1 = num1.length() -1, length2 = num2.length() -1;
+        while(length1 >=0 || length2 >= 0 || hasTen) {
+            int cur = (length1 >= 0 ? Integer.parseInt(num1.substring(length1, length1 + 1)) : 0) + (length2 >= 0 ? Integer.parseInt(num2.substring(length2, length2 + 1)) : 0) + (hasTen ? 1 : 0);
+            hasTen = cur >= 10;
+            cur %=10;
+            res = cur + res;
+            length1--;
+            length2--;
+        }
+        return res;
+    }
+}
