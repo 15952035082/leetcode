@@ -1,0 +1,35 @@
+https://leetcode-cn.com/problems/next-permutation/
+
+
+
+class Solution {
+    public void nextPermutation(int[] nums) {
+        int needToMoveIndex = nums.length - 2;
+        while(needToMoveIndex >= 0 && nums[needToMoveIndex] >= nums[needToMoveIndex + 1]) {
+            needToMoveIndex --;
+        }
+        if(needToMoveIndex >= 0) {
+            int minBiggerIndex = nums.length - 1;
+            while(minBiggerIndex >=0 && nums[needToMoveIndex] >= nums[minBiggerIndex]) {
+                minBiggerIndex--;
+            }
+            swap(nums, needToMoveIndex, minBiggerIndex);
+        }
+        reverse(nums, needToMoveIndex + 1);
+    }
+
+    private void reverse(int[] nums, int start) {
+        int end = nums.length - 1;
+        while(start < end) {
+            swap(nums , start, end);
+            start++;
+            end--;
+        }
+    }
+
+    private void swap(int[] nums, int start, int end) {
+        int temp = nums[start];
+        nums[start] = nums[end];
+        nums[end] = temp;
+    }
+}

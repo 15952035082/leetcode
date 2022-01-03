@@ -45,48 +45,21 @@ public class Main {
 
     }
 
-    public void reorderList(ListNode head) {
-        if(head == null) {
-            return;
+    public int lengthOfLIS(int[] nums) {
+        int length = nums.length;
+        int[] dp = new int[length];
+        int maxLength = 1;
+        dp[0] = 1;
+        for(int i = 1; i< length; i ++) {
+            dp[i] = 1;
+            for(int j = 0 ; j < i; j ++) {
+                if(nums[i] > nums[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+            maxLength = Math.max(dp[i], maxLength);
         }
-        ListNode mid = findMid(head);
-        ListNode l1 = head;
-        ListNode l2 = mid.next;
-        mid.next = null;
-        l2 = reversList(l2);
-        mergeTwoList(l1, l2);
-    }
-
-    private void mergeTwoList(ListNode list1, ListNode list2) {
-        while(list1 != null && list2 != null) {
-            ListNode temp1 = list1.next;
-            ListNode temp2 = list2.next;
-            list1.next = list2;
-            list1 = temp1;
-            list2.next = list1;
-            list2 = temp2;
-        }
-    }
-
-    private ListNode reversList(ListNode head) {
-        ListNode pre = null, cur = head;
-        while(cur != null) {
-            ListNode temp = cur.next;
-            cur.next = pre;
-            pre = cur;
-            cur = temp;
-        }
-        return pre;
-    }
-
-    private ListNode findMid(ListNode head) {
-        ListNode fast = head;
-        ListNode slow = head;
-        while(fast.next != null && fast.next.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-        return slow;
+        return maxLength;
     }
 
 
