@@ -1,50 +1,23 @@
-package main;
+https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
 
-import java.util.*;
 
-public class Main {
 
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
-
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode() {
-        }
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
-    }
-
-    public static void main(String[] args) {
-        System.out.println();
-
-    }
-
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
     Map<Integer, Integer> indexMap = new HashMap<>();
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
@@ -67,6 +40,4 @@ public class Main {
         root.right = myBuildTree(preorder, inorder, pl + leftSize + 1, pr, iRoot + 1, ir);
         return root;
     }
-
-
 }
