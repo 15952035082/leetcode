@@ -1,50 +1,11 @@
-package main;
+https://leetcode-cn.com/problems/minimum-window-substring/
 
-import java.util.*;
 
-public class Main {
 
-    public class ListNode {
-        int val;
-        ListNode next;
 
-        ListNode() {
-        }
 
-        ListNode(int val) {
-            this.val = val;
-        }
 
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
-
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode() {
-        }
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
-    }
-
-    public static void main(String[] args) {
-        System.out.println();
-
-    }
-
+class Solution {
     public String minWindow(String s, String t) {
         int len = t.length();
         int[] needCnt = new int[128];
@@ -77,5 +38,7 @@ public class Main {
         return minSize == Integer.MAX_VALUE ? "" : s.substring(startIndex, startIndex + minSize);
     }
 
-
 }
+
+
+
