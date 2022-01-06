@@ -1,0 +1,50 @@
+https://leetcode-cn.com/problems/path-sum-ii/
+
+
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    List<List<Integer>> res = new ArrayList<>();
+    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+        if(root == null) {
+            return res;
+        }
+        Deque<Integer> queue = new LinkedList<Integer>();
+        getChildSumV2(root, targetSum, 0, queue);
+        return res;
+    }
+
+    private void getChildSumV2(TreeNode root, int targetSum, int sum, Deque<Integer> list) {
+        sum = sum + root.val;
+        list.offerLast(root.val);
+        if(root.left == null && root.right == null) {
+            if(sum == targetSum) {
+                res.add(new ArrayList<>(list));
+            }
+            list.pollLast();
+            return;
+        }
+        if(root.left != null) {
+            getChildSumV2(root.left, targetSum, sum, list);
+        }
+        if(root.right != null) {
+            getChildSumV2(root.right, targetSum, sum, list);
+        }
+        list.pollLast();
+    }
+}

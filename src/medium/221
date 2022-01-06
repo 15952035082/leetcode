@@ -1,50 +1,8 @@
-package main;
+https://leetcode-cn.com/problems/maximal-square/
 
-import java.util.*;
 
-public class Main {
 
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
-
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode() {
-        }
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
-    }
-
-    public static void main(String[] args) {
-        System.out.println();
-
-    }
-
+class Solution {
     int max = 0;
     public int maximalSquare(char[][] matrix) {
         int[][] dp = new int[matrix.length][matrix[0].length];
@@ -66,6 +24,4 @@ public class Main {
         }
         return max * max;
     }
-
-
 }
