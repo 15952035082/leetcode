@@ -45,26 +45,29 @@ public class Main {
 
     }
 
-    int max = 0;
-    public int maximalSquare(char[][] matrix) {
-        int[][] dp = new int[matrix.length][matrix[0].length];
-        for(int i = 0; i< matrix.length; i ++) {
-            for(int j = 0 ; j< matrix[0].length ; j++) {
-                if(matrix[i][j] == '0') {
-                    dp[i][j] = 0;
-                } else {
-                    if(i == 0 || j == 0) {
-                        dp[i][j] = 1;
-                    } else if(dp[i-1][j] != 0 && dp[i][j-1] != 0 && dp[i-1][j-1] != 0) {
-                        dp[i][j] = Math.min(Math.min(dp[i-1][j], dp[i][j-1]), dp[i-1][j-1]) + 1;
-                    } else {
-                        dp[i][j] = 1;
-                    }
-                    max = Math.max(max, dp[i][j]);
-                }
+    public ListNode detectCycle(ListNode head) {
+        if(head == null) {
+            return null;
+        }
+        ListNode fast = head;
+        ListNode slow = head;
+        while(fast != null) {
+            slow = slow.next;
+            if(fast.next != null) {
+                fast = fast.next.next;
+            } else {
+                return null;
+            }
+            if(fast == slow) {
+               ListNode ptr = head;
+               while(ptr != slow) {
+                   ptr = ptr.next;
+                   slow = slow.next;
+               }
+               return ptr;
             }
         }
-        return max * max;
+        return null;
     }
 
 

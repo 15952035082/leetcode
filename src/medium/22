@@ -1,0 +1,27 @@
+https://leetcode-cn.com/problems/generate-parentheses/
+
+
+
+
+class Solution {
+    List<String> res = new LinkedList<>();
+    public List<String> generateParenthesis(int n) {
+        myGenerate("", n, n, n);
+        return res;
+    }
+
+    private void myGenerate(String cur, int leftSize, int rightSize, int allSize) {
+        if(rightSize == 0) {
+            res.add(cur);
+            return;
+        }
+        // 使用左括号
+        if(leftSize > 0) {
+            myGenerate(cur + '(', leftSize - 1, rightSize, allSize);
+        }
+        // 使用右括号
+        if(leftSize < rightSize) {
+            myGenerate(cur + ')', leftSize, rightSize -1, allSize);
+        }
+    }
+}
