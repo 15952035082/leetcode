@@ -1,0 +1,45 @@
+https://leetcode-cn.com/problems/sort-an-array/
+
+
+
+
+class Solution {
+    public int[] sortArray(int[] nums) {
+        randomQuickSort(nums, 0, nums.length -1);
+        return nums;
+    }
+
+    private void randomQuickSort(int[] nums, int l, int r) {
+        if(l < r) {
+            int pos = randomPartition(nums, l , r);
+            randomQuickSort(nums, l, pos -1);
+            randomQuickSort(nums, pos + 1, r);
+        }
+    }
+
+    private int randomPartition(int[] nums, int l, int r) {
+        int i = new Random().nextInt(r-l+1) + l;
+        swap(nums, r, i);
+        return quickSort(nums, l, r);
+    }
+
+    private int quickSort(int[] nums, int l, int r) {
+        int pivot = nums[r];
+        int i = l - 1;
+        for(int j = l ; j < r; j++ ) {
+            if(nums[j] <= pivot) {
+                i++;
+                swap(nums, j, i);
+            }
+        }
+        swap(nums, i + 1, r);
+        return i + 1;
+    }
+
+    private void swap(int[] nums, int r, int i) {
+        int temp = nums[r];
+        nums[r] = nums[i];
+        nums[i] = temp;
+    }
+
+}

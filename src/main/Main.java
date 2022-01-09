@@ -41,33 +41,20 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        System.out.println();
 
     }
 
-    public ListNode detectCycle(ListNode head) {
-        if(head == null) {
-            return null;
-        }
-        ListNode fast = head;
-        ListNode slow = head;
-        while(fast != null) {
-            slow = slow.next;
-            if(fast.next != null) {
-                fast = fast.next.next;
+    public int findPeakElement(int[] nums) {
+        int l = 0, r= nums.length -1;
+        while(l < r) {
+            int mid = (l + r)/2;
+            if(nums[mid] < nums[mid + 1]) {
+                l = mid + 1;
             } else {
-                return null;
-            }
-            if(fast == slow) {
-               ListNode ptr = head;
-               while(ptr != slow) {
-                   ptr = ptr.next;
-                   slow = slow.next;
-               }
-               return ptr;
+                r = mid;
             }
         }
-        return null;
+        return l;
     }
 
 
