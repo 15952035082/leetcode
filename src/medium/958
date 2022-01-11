@@ -1,0 +1,41 @@
+https://leetcode-cn.com/problems/check-completeness-of-a-binary-tree/
+
+
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int size = 0;
+    int maxIndex = 0;
+    public boolean isCompleteTree(TreeNode root) {
+        if(root == null) {
+            return true;
+        }
+        recursive(root, 1);
+        return size == maxIndex;
+    }
+
+    private void recursive(TreeNode root, int index) {
+        if(root == null) {
+            return;
+        }
+        size++;
+        maxIndex = Math.max(maxIndex, index);
+        recursive(root.left, index * 2);
+        recursive(root.right, index * 2 + 1);
+    }
+}

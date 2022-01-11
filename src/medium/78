@@ -1,0 +1,25 @@
+https://leetcode-cn.com/problems/subsets/
+
+
+
+class Solution {
+    List<List<Integer>> res = new LinkedList<>();
+    public List<List<Integer>> subsets(int[] nums) {
+        Deque<Integer> que = new LinkedList<>();
+        backTrack(nums, 0, que);
+        return res;
+    }
+
+    private void backTrack(int[] nums, int index, Deque<Integer> que) {
+        if(index == nums.length) {
+            res.add(new ArrayList<>(que));
+            return;
+        }
+        // 不使用
+        backTrack(nums, index+1, que);
+        // 使用当前元素，
+        que.addLast(nums[index]);
+        backTrack(nums, index+1, que);
+        que.pollLast();
+    }
+}
