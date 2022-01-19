@@ -1,0 +1,37 @@
+https://leetcode-cn.com/problems/max-area-of-island/
+
+
+
+class Solution {
+    int res = 0;
+    int curSize = 0;
+
+    public int maxAreaOfIsland(int[][] grid) {
+        for(int i = 0 ; i < grid.length; i ++) {
+            for(int j = 0 ; j< grid[0].length; j ++) {
+                searchCur(grid, i, j);
+                res = Math.max(res, curSize);
+                curSize = 0;
+            }
+        }
+        return res;
+    }
+
+    private void search(int[][] grid, int i, int j) {
+        if( i < 0 || i == grid.length || j < 0 || j == grid[0].length) {
+            return;
+        }
+        searchCur(grid, i, j);
+    }
+
+    private void searchCur(int[][] grid, int i, int j) {
+        if(grid[i][j] == 1) {
+            grid[i][j] = 0;
+            curSize ++;
+            search(grid, i + 1, j);
+            search(grid, i - 1, j);
+            search(grid, i , j + 1);
+            search(grid, i , j - 1);
+        }
+    }
+}

@@ -1,0 +1,22 @@
+https://leetcode-cn.com/problems/add-two-numbers/
+
+
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode sum = new ListNode(1);
+        ListNode ret = sum;
+        int ten = 0;
+        while(l1!= null || l2 != null) {
+
+            sum.next = new ListNode((((l1!= null ? l1.val : 0) + (l2!= null ? l2.val : 0)) + ten)%10);
+            ten = ((l1!= null ? l1.val : 0) + (l2!= null ? l2.val : 0) + ten) >= 10 ? 1 : 0;
+            l1 = l1 != null ? l1.next : null;
+            l2 = l2 != null ? l2.next : null;
+            sum = sum.next;
+        }
+        if(ten != 0) {
+            sum.next = new ListNode(1);
+        }
+        return ret.next;
+    }
+}
