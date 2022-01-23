@@ -41,61 +41,18 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        HashMap map = new HashMap();
-        byte[] a = new byte[5];
-        Object b = new Object();
-        List<Integer> list = new ArrayList<Integer>();
-        System.out.println(b.toString());
+        int[] a = new int[]{1,2,3,1};
     }
 
-    String src;
-    int ptr;
-
-    public String decodeString(String s) {
-        src = s;
-        ptr = 0;
-        return getString();
-    }
-
-    public String getString() {
-        if (ptr == src.length() || src.charAt(ptr) == ']') {
-            // String -> EPS
-            return "";
+    public int rob(int[] nums) {
+        int[][] dp = new int[nums.length][2];
+        for(int i = 0 ; i < nums.length; i++) {
+            // 0表示不抢i
+            dp[i][0] = i == 0 ? 0 : Math.max(dp[i-1][0], dp[i-1][1]);
+            // 1表示要抢
+            dp[i][1] = i <= 1 ? nums[i] : Math.max(dp[i-1][0], dp[i-2][1]) + nums[i];
         }
-
-        char cur = src.charAt(ptr);
-        int repTime = 1;
-        String ret = "";
-
-        if (Character.isDigit(cur)) {
-            // String -> Digits [ String ] String
-            // 解析 Digits
-            repTime = getDigits();
-            // 过滤左括号
-            ++ptr;
-            // 解析 String
-            String str = getString();
-            // 过滤右括号
-            ++ptr;
-            // 构造字符串
-            while (repTime-- > 0) {
-                ret += str;
-            }
-        } else if (Character.isLetter(cur)) {
-            // String -> Char String
-            // 解析 Char
-            ret = String.valueOf(src.charAt(ptr++));
-        }
-
-        return ret + getString();
-    }
-
-    public int getDigits() {
-        int ret = 0;
-        while (ptr < src.length() && Character.isDigit(src.charAt(ptr))) {
-            ret = ret * 10 + src.charAt(ptr++) - '0';
-        }
-        return ret;
+        return Math.max(dp[nums.length - 1][0], dp[nums.length -1][1]);
     }
 
 
